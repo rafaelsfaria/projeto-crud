@@ -35,8 +35,44 @@ const create = (connection, data) => {
   })
 }
 
+const findById = (connection, id) => {
+  return new Promise((resolve, reject) => {
+    connection.query(`select * from pessoas where id=${id} limit 1`, (err, results) => {
+      if (err) {
+        reject(err)
+      } else {
+        if (results.length > 0) {
+          resolve(results[0])
+        } else {
+          resolve({})
+        }
+      }
+    })
+  })
+}
+
+const update = (connection, id, data) => {
+  const { nome, nascimento, cargo } = data
+  return new Promise((resolve, reject) => {
+    connection.query(`update pessoas set nome='${nome}', nascimento='${nascimento}', cargo='${cargo}' where id=${id}`, (err, results) => {
+      if (err) {
+        reject(err)
+      } else {
+        if (results.length > 0) {
+          resolve(results[0])
+        } else {
+          resolve({})
+        }
+      }
+    })
+  })
+}
+
+
 module.exports = {
   findAll,
   deleteOne,
-  create
+  create,
+  findById,
+  update
 }

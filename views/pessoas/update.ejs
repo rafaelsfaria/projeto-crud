@@ -1,0 +1,23 @@
+<%- include('../partials/header') %>
+
+<div>
+  <h1>Editar pessoa</h1>
+  <p><a href="/pessoas">Retornar à lista de pessoas</a></p>
+  <form action="/pessoas/update/<%= pessoa.id %>" method="POST">
+    <div class="form-group">
+      <label for="nome">Nome</label>
+      <input type="text" class="form-control" id="nome" name="nome" value="<%= pessoa.nome %>" placeholder="Campo nome">
+    </div>
+    <div class="form-group">
+      <label for="nascimento">Nascimento</label>
+      <input type="date" class="form-control" id="nascimento" name="nascimento" value="<%= formatedDate %>" placeholder="Data de nascimento">
+    </div>
+    <div class="form-group">
+      <label for="cargo">Cargo</label>
+      <input type="text" class="form-control" id="cargo" name="cargo" value="<%= pessoa.cargo %>" placeholder="Cargo">
+    </div>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+  </form>
+</div>
+
+<%- include('../partials/footer') %>
