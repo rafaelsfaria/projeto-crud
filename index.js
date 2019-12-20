@@ -1,6 +1,7 @@
 const express = require('express')
 const path = require('path')
 const mysql = require('mysql')
+const pessoas = require('./routes/pessoas')
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -11,8 +12,9 @@ const connection = mysql.createConnection({
   password: '',
   database: 'cadastro'
 })
-
-connection.connect(() => console.log('connected'))
+const dependencies = {
+  connection
+}
 
 app.use(express.static('public'))
 
@@ -24,4 +26,8 @@ app.get('/', (req, res) => {
   res.render('home')
 })
 
-app.listen(port, () => console.log('CRUD listening on ' + port))
+app.use('/pessoas', pessoas(dependencies))
+
+connection.connect(() => {
+  app.listen(port, () => console.log('CRUD listening on ' + port))
+})
