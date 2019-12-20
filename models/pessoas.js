@@ -22,7 +22,21 @@ const deleteOne = (connection, id) => {
   })
 }
 
+const create = (connection, data) => {
+  const { nome, nascimento, cargo } = data
+  return new Promise((resolve, reject) => {
+    connection.query(`insert into pessoas (nome, nascimento, cargo) values ('${nome}', '${nascimento}', '${cargo}')`, (err, results) => {
+      if (err) {
+        reject(err)
+      } else {
+        resolve(results)
+      }
+    })
+  })
+}
+
 module.exports = {
   findAll,
-  deleteOne
+  deleteOne,
+  create
 }

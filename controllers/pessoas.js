@@ -10,7 +10,18 @@ const deleteRoute = async (connection, req, res) => {
   res.redirect('/pessoas')
 }
 
+const createRoute = (req, res) => {
+  res.render('pessoas/create')
+}
+
+const createPessoa = async (connection, req, res) => {
+  await pessoas.create(connection, req.body)
+  res.redirect('/pessoas')
+}
+
 module.exports = {
   index,
-  deleteRoute
+  deleteRoute,
+  createRoute,
+  createPessoa
 }

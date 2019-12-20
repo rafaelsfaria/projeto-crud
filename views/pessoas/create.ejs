@@ -1,0 +1,23 @@
+<%- include('../partials/header') %>
+
+<div>
+  <h1>Adicionar pessoa</h1>
+  <p><a href="/pessoas">Retornar à lista de pessoas</a></p>
+  <form action="/pessoas/create" method="POST">
+    <div class="form-group">
+      <label for="nome">Nome</label>
+      <input type="text" class="form-control" id="nome" name="nome" placeholder="Campo nome">
+    </div>
+    <div class="form-group">
+      <label for="nascimento">Nascimento</label>
+      <input type="date" class="form-control" id="nascimento" name="nascimento" placeholder="Data de nascimento">
+    </div>
+    <div class="form-group">
+      <label for="cargo">Cargo</label>
+      <input type="text" class="form-control" id="cargo" name="cargo" placeholder="Cargo">
+    </div>
+    <button type="submit" class="btn btn-primary">Criar</button>
+  </form>
+</div>
+
+<%- include('../partials/footer') %>

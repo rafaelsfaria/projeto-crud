@@ -12,10 +12,13 @@ const connection = mysql.createConnection({
   password: '',
   database: 'cadastro'
 })
+
 const dependencies = {
   connection
 }
 
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
 app.use(express.static('public'))
 
 // view engine
