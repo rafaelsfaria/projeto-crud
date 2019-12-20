@@ -1,16 +1,20 @@
 const express = require('express')
 const path = require('path')
-const mysql = require('mysql')
+// const mysql = require('mysql')
+const knex = require('knex')
 const pessoas = require('./routes/pessoas')
 
 const app = express()
 const port = process.env.PORT || 3000
 
-const connection = mysql.createConnection({
-  host: '127.0.0.1',
-  user: 'root',
-  password: '',
-  database: 'cadastro'
+const connection = knex({
+  client: 'mysql2',
+  connection: {
+    host: '127.0.0.1',
+    user: 'root',
+    password: '',
+    database: 'cadastro',
+  }
 })
 
 const dependencies = {
@@ -31,6 +35,9 @@ app.get('/', (req, res) => {
 
 app.use('/pessoas', pessoas(dependencies))
 
-connection.connect(() => {
+// connection do knex nao tem callback para status de conexao
+connection.raw('SELECT 1').then(() => {
   app.listen(port, () => console.log('CRUD listening on ' + port))
-})
+}).catch((err) => {
+  throw err
+});

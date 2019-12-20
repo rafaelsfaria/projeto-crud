@@ -22,8 +22,7 @@ const createPessoa = async (connection, req, res) => {
 
 const updateRoute = async (connection, req, res) => {
   const pessoa = await pessoas.findById(connection, req.params.id)
-  const { nascimento } = pessoa
-  
+  const { nascimento } = pessoa  
   const formatedDate = formatDate(nascimento)
   res.render('pessoas/update', { pessoa, formatedDate })
 }
